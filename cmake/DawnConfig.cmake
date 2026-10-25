@@ -26,9 +26,9 @@
 # Library version
 #
 
-set(Dawn_VERSION "152" CACHE STRING "Dawn_VERSION")
+set(Dawn_VERSION "157" CACHE STRING "Dawn_VERSION")
 set(Dawn_sha256
-  "9b0a079f4f3556bed0479f2c55bdd2c082d6d441d56e3b7396f68a7b9a4c9b91"
+  "76912fb346c9bccd748764eec377e52a6dcd1e64e93e03ca0b412f24822c28ad"
   CACHE STRING "Dawn_sha256"
 )
 

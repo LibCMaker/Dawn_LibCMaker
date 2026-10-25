@@ -27,7 +27,18 @@
 #
 
 set(upd_DAWN_SRC_URL "https://dawn.googlesource.com/dawn.git")
-set(upd_DAWN_BRANCH  "1e897275172a23f27b0022fa6beae3084ed54a9b")
+# Commit date: Sat Oct 10 17:07:14 2026 -0700
+# For skia-m157
+set(upd_DAWN_BRANCH  "ada567700e13aecf7989d78b21f7d330b522ea80")
+
+
+#-----------------------------------------------------------------------
+# Define LibCMaker dirs, includes and vars
+#-----------------------------------------------------------------------
+
+if(NOT cmr_BUILD_MULTIPROC_CNT)
+  set(cmr_BUILD_MULTIPROC_CNT "1")
+endif()
 
 
 #-----------------------------------------------------------------------
@@ -48,8 +59,8 @@ set(upd_DAWN_SRC_DIR        "${upd_ARCHIVE_DIR}/${upd_SRC_NAME}")
 find_package(Git 2.17.1 REQUIRED)
 find_package(Python REQUIRED COMPONENTS Interpreter)
 
-if(Python_VERSION VERSION_LESS 3.8)
-  cmr_print_error("Dawn requires python 3.8+.")
+if(Python_VERSION VERSION_LESS 3.9)
+  cmr_print_error("Dawn requires python 3.9+.")
 endif()
 
 find_program(tar_EXECUTABLE "tar" REQUIRED)
@@ -115,7 +126,7 @@ endif()
 
 function(upd_apply_dawn_source_patch _name)
   set(${_name}_STAMP
-    "${upd_ARCHIVE_DIR}/patch__${_name}__.stamp"
+    "${upd_DAWN_SRC_DIR}/patch__${_name}__.stamp"
   )
   if(NOT EXISTS ${${_name}_STAMP})
     cmr_print_status("Apply Dawn source patch: '${_name}'")
@@ -145,7 +156,7 @@ endfunction()
 #
 
 set(fetch_dawn_dependencies_STAMP
-  "${upd_ARCHIVE_DIR}/tools__fetch_dawn_dependencies.stamp"
+  "${upd_DAWN_SRC_DIR}/tools__fetch_dawn_dependencies_--shallow.stamp"
 )
 if(NOT EXISTS ${fetch_dawn_dependencies_STAMP})
   cmr_print_status("Run 'tools/fetch_dawn_dependencies.py'")
